@@ -69,7 +69,7 @@ func ScrapeKataPage(url *string, wg *sync.WaitGroup, katasChan chan map[string]i
 		kyu := parseKyu(kataBlock)
 		languages := parseLanguages(kataBlock)
 		keywordTags := parseKeywordTags(kataBlock)
-		m := map[string]interface{}{
+		kataParams := map[string]interface{}{
 			"uid": uid,
 			"title": title,
 			"url": url,
@@ -77,6 +77,6 @@ func ScrapeKataPage(url *string, wg *sync.WaitGroup, katasChan chan map[string]i
 			"languages": languages,
 			"keywordTags": keywordTags,
 		}
-		katasChan <- m
+		katasChan <- kataParams
 	})
 }
