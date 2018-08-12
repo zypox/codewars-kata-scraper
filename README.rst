@@ -3,6 +3,15 @@ About
 
 Tool which scrapes all Katas from codewars.com and puts them into PogstreSQL.
 
+Currently the following parameters are scraped::
+
+    - Kata ID,
+    - Title,
+    - URL,
+    - kyu (kata difficulty level),
+    - languages that kata is implemented with,
+    - Kata keyword tags.
+
 Dependencies
 ============
 
