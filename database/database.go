@@ -1,6 +1,7 @@
 package database
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -14,7 +15,7 @@ type Kata struct {
 	Title string
 	Kyu int
 	Url string
-	Data postgres.Jsonb
+	Metadata postgres.Jsonb
   }
 
 type Client struct {
@@ -54,6 +55,14 @@ func (c *Client) InsertKatas(kataChan chan map[string]interface{}) {
 		title, _ := kataMap["title"].(string)
 		kyu, _ := kataMap["kyu"].(int)
 		url, _ := kataMap["url"].(string)
+		languages, _ := kataMap["languages"].([] string)
+		keywordTags, _ := kataMap["keywordTags"].([] string)
+
+		metadata := map[string][] string{
+			"languages": languages,
+			"keywordTags": keywordTags,
+		}
+		metadataJSON, _ := json.Marshal(metadata)
 
 		log.Printf("Inserting Kata to DB with vals: %v", kataMap)
 
@@ -63,6 +72,7 @@ func (c *Client) InsertKatas(kataChan chan map[string]interface{}) {
 			Title: title,
 			Kyu: kyu,
 			Url: url,
+			Metadata: postgres.Jsonb{ metadataJSON },
 		}).FirstOrCreate(&kata)
 	}
 }
