@@ -21,6 +21,10 @@ Dependencies
 Usage
 =====
 
+Install required dependencies::
+
+    $ dep ensure
+
 To compile and run the scraper::
 
     $ go run main.go
