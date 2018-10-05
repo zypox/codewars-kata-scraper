@@ -13,3 +13,6 @@
 
 # IDE
 .idea/
+
+# 3rd party libraries
+vendor/
